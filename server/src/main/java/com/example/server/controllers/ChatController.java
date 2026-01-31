@@ -1,6 +1,7 @@
 package com.example.server.controllers;
 
-import org.springframework.ai.chat.client.ChatClient;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,10 @@ public class ChatController {
     private AIAgent aiAgent;
     
 
+    @GetMapping("/test")
+    public Map<String, String> test(){
+        return Map.of("Message", "Server is running...");
+    }
 
     @GetMapping("/chat")
     public String chat(
