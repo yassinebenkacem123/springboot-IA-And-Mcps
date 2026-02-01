@@ -25,6 +25,7 @@ public class AIAgent {
 
         });
         this.chatClient = builder
+            .defaultSystem("You are an AI assistant. Your goal is to answer questions using the context provided")
             .defaultAdvisors(
                 MessageChatMemoryAdvisor.builder(memory)
                 .build()
