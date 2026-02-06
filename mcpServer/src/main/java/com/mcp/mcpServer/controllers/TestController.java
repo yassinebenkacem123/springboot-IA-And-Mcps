@@ -16,7 +16,6 @@ public class TestController {
     public ResponseEntity<?> testEndPoint(){
         Map<String ,String> obj = new HashMap<>();
         obj.put("Message", "Server is running...");
-
         return new ResponseEntity<>(obj,HttpStatus.OK);
     }
 }
