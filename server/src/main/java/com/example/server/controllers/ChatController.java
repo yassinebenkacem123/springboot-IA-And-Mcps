@@ -2,6 +2,7 @@ package com.example.server.controllers;
 
 import java.util.Map;
 
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class ChatController {
     public String chat(
             @RequestParam(name = "message") String message
         ){
-        return aiAgent.chat(message);
+        return aiAgent.chat(new Prompt(message));
     }
 
 }
