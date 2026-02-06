@@ -26,7 +26,7 @@ public class AIAgent {
 
         });
         this.chatClient = builder
-            .defaultSystem("You are an AI assistant. Your goal is to answer questions using the context provided,If you don't know the answer, say you don't know. Always use the tools provided to you when necessary.")
+            .defaultSystem("You are an AI assistant. Your goal is to answer questions using the context provided,If you don't know the answer, say you don't know. and also You are an AI assistant that can understand text and images. You can describe, analyze, and provide insights from pictures sent to you. Use the media provided in the user message to answer questions about the image.")
             .defaultAdvisors(
                 MessageChatMemoryAdvisor.builder(memory)
                 .build()
