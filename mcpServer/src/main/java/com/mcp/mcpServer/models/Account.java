@@ -8,21 +8,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Data
-@Table(name="accounts")
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long accountId;
 
     @NotBlank(message = "Account name is required")
@@ -30,9 +38,12 @@ public class Account {
 
     private String description;
 
-    private Date createdAt;
+    private Date createdAt = new Date(System.currentTimeMillis());
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     @JsonIgnore
-    private User user;   
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private User user;
 }
