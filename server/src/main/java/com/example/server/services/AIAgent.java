@@ -1,44 +1,52 @@
 package com.example.server.services;
-
 import java.util.Arrays;
-
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.stereotype.Service;
-import lombok.Data;
+
 @Service
-@Data
 public class AIAgent {
 
     private ChatClient chatClient;
-    
+
     public AIAgent(
-        ChatClient.Builder builder,
-        ChatMemory memory,
-        ToolCallbackProvider tools
-    ){
-        Arrays.stream(tools.getToolCallbacks()).forEach(tool->{
+            ChatClient.Builder builder,
+            ChatMemory memory,
+            ToolCallbackProvider tools) {
+        Arrays.stream(tools.getToolCallbacks()).forEach(tool -> {
             System.out.println("-------------------------------------------------------");
             System.out.println(tool.getToolDefinition());
 
         });
+
         this.chatClient = builder
-            .defaultSystem("You are an AI assistant. Your goal is to answer questions using the context provided,If you don't know the answer, say you don't know. and also You are an AI assistant that can understand text and images. You can describe, analyze, and provide insights from pictures sent to you. Use the media provided in the user message to answer questions about the image.")
-            .defaultAdvisors(
-                MessageChatMemoryAdvisor.builder(memory)
-                .build()
-            ).defaultToolCallbacks(tools)
-            .build();
-        
+                .defaultSystem("""
+                            You are an AI assistant. Your goals are to :
+                            - Answer the questions using the context provided
+                            - State clearly when you don't know the an answer
+                            - Understand and analyze the both text and images
+                            - Provide insights from pictures when provided
+                        """)
+                .defaultAdvisors(
+                        MessageChatMemoryAdvisor.builder(memory)
+                                .build())
+                .defaultToolCallbacks(tools)
+                .build();
+
+
     }
 
-    public String chat(Prompt message){
+    public String chat(Prompt message) {
+      
         return chatClient
-            .prompt(message)
-            .call()
-            .content();
+                .prompt(message)
+                .call()
+                .content();
+       
     }
+
+   
 }
