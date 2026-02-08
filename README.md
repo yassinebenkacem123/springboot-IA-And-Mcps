@@ -137,8 +137,3 @@ If startup fails on `delete from vector_store`:
 - Create the table (or enable auto-schema creation if supported)
 - Verify DB URL/credentials
 - Verify permissions
-
-
-## License
-
-Add your license here (MIT/Apache-2.0/etc).
