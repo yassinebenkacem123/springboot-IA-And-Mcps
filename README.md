@@ -5,8 +5,6 @@ Multi-module Spring Boot workspace that demonstrates:
 - **`server/`**: ingesting a PDF (`facture.pdf`), splitting it into chunks, and storing embeddings in a **VectorStore** (backed by a SQL table).
 - **`mcpServer/`**: exposing **MCP (Model Context Protocol)** features (Prompts/Resources/Tools depending on your config) so an agent (or MCP Inspector) can query resources and run server-side capabilities.
 
-> Windows-first instructions (this repo was developed on Windows).
-
 ---
 
 ## Modules
